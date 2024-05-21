@@ -20,6 +20,7 @@ export default function Home() {
       />
       <CurrentTasksList
         taskList={taskList}
+        setTaskList={setTaskList}
         completedTaskList={completedTaskList}
         setCompletedTaskList={setCompletedTaskList}
       />
