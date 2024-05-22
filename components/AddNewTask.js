@@ -1,40 +1,48 @@
-import CurrentTasksList from "./CurrentTasksList";
 import { Box, Button, TextField, Typography, Paper } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const AddNewTask = ({
-  taskInput,
-  setTaskInput,
+  taskName,
+  setTaskName,
+  taskDescription,
+  setTaskDescription,
+  taskDue,
+  setTaskDue,
   taskList,
   setTaskList,
   completedTaskList,
   setCompletedTaskList,
 }) => {
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(0);
   console.log(taskList);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (taskInput !== "") {
-      const newTask = { id: counter, taskInput: taskInput };
+    if (taskName.trim() !== "") {
+      const newTask = {
+        id: counter,
+        taskName: taskName,
+        taskDescription: taskDescription,
+        taskDue: taskDue,
+      };
       const updatedTaskList = [...taskList, newTask];
       setTaskList(updatedTaskList);
       setCounter(counter + 1);
-      setTaskInput("");
+      setTaskName("");
+      setTaskDescription("");
+      setTaskDue("");
+    } else {
+      console.log("Please enter a task name.");
     }
   };
   return (
     <Box sx={{ mb: 10 }}>
       <Box
-        component="form"
-        onSubmit={handleSubmit}
-        noValidate
-        autoComplete="off"
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          maxWidth: 600,
+          maxWidth: 800,
           mx: "auto",
           border: "1px solid #374e9e",
           borderRadius: 10,
@@ -63,18 +71,35 @@ const AddNewTask = ({
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              maxWidth: 600,
+              mx: "auto",
+              mt: 10,
             }}
           >
             <TextField
               id="outlined-basic"
-              label="Task name"
+              label="Name the task"
               variant="outlined"
-              value={taskInput}
+              value={taskName}
+              onChange={(e) => setTaskName(e.target.value)}
               sx={{ mb: 4, width: "100%", backgroundColor: "#ffffff" }}
-              onChange={(e) => setTaskInput(e.target.value)}
             />
-            {/* <TextField id="outlined-basic" label="Details of task" variant="outlined" />
-        <TextField id="outlined-basic" label="When due" variant="outlined" /> */}
+            <TextField
+              id="outlined-basic"
+              label="Additonal task details"
+              variant="outlined"
+              value={taskDescription}
+              onChange={(e) => setTaskDescription(e.target.value)}
+              sx={{ mb: 4, width: "100%", backgroundColor: "#ffffff" }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="When is the task due?"
+              variant="outlined"
+              value={taskDue}
+              onChange={(e) => setTaskDue(e.target.value)}
+              sx={{ mb: 4, width: "100%", backgroundColor: "#ffffff" }}
+            />
             <Button
               variant="contained"
               type="submit"

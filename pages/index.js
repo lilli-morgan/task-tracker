@@ -4,15 +4,21 @@ import CurrentTasksList from "@/components/CurrentTasksList";
 import { useState } from "react";
 
 export default function Home() {
-  const [taskInput, setTaskInput] = useState("");
+  const [taskName, setTaskName] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [taskDue, setTaskDue] = useState("");
   const [taskList, setTaskList] = useState([]);
   const [completedTaskList, setCompletedTaskList] = useState([]);
   return (
     <>
       <ResponsiveAppBar />
       <AddNewTask
-        taskInput={taskInput}
-        setTaskInput={setTaskInput}
+        taskName={taskName}
+        setTaskName={setTaskName}
+        taskDescription={taskDescription}
+        setTaskDescription={setTaskDescription}
+        taskDue={taskDue}
+        setTaskDue={setTaskDue}
         taskList={taskList}
         setTaskList={setTaskList}
         completedTaskList={completedTaskList}

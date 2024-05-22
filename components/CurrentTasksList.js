@@ -27,7 +27,7 @@ const CurrentTasksList = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        maxWidth: 600,
+        maxWidth: 800,
         margin: "auto",
         p: 5,
         border: "1px solid #374e9e",
@@ -53,16 +53,31 @@ const CurrentTasksList = ({
                 <ListItem key={task.id}>
                   <ListItemText
                     primary={
-                      task.taskInput.charAt(0).toUpperCase() +
-                      task.taskInput.slice(1)
+                      <Typography variant="h6" color="textPrimary">
+                        {task.taskName.charAt(0).toUpperCase() +
+                          task.taskName.slice(1)}
+                      </Typography>
                     }
-                    sx={{
-                      color: "#374e9e",
-                      fontSize: "5rem",
-                      fontWeight: "bold",
-                    }}
+                    secondary={
+                      <Box>
+                        <Typography
+                          variant="body1"
+                          color="textSecondary"
+                          sx={{ mb: 1 }}
+                        >
+                          Description:{" "}
+                          {task.taskDescription.charAt(0).toUpperCase() +
+                            task.taskDescription.slice(1)}
+                        </Typography>
+                        <Typography variant="body1" color="black">
+                          Due:{" "}
+                          {task.taskDue.charAt(0).toUpperCase() +
+                            task.taskDue.slice(1)}
+                        </Typography>
+                      </Box>
+                    }
                   />
-                  <Box sx={{ display: "flex", gap: 2 }}>
+                  <Box sx={{ ml: "auto", display: "flex", gap: 2 }}>
                     <CompleteTaskButton
                       id={task.id}
                       taskList={taskList}
