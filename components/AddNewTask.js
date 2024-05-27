@@ -1,5 +1,10 @@
 import { Box, Button, TextField, Typography, Paper } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs from "dayjs";
+import "dayjs/locale/en-gb";
 
 const AddNewTask = ({
   taskName,
@@ -10,8 +15,6 @@ const AddNewTask = ({
   setTaskDue,
   taskList,
   setTaskList,
-  completedTaskList,
-  setCompletedTaskList,
 }) => {
   const [counter, setCounter] = useState(0);
   console.log(taskList);
@@ -23,7 +26,7 @@ const AddNewTask = ({
         id: counter,
         taskName: taskName,
         taskDescription: taskDescription,
-        taskDue: taskDue,
+        taskDue: taskDue ? taskDue.format("DD/MM/YYYY") : "",
       };
       const updatedTaskList = [...taskList, newTask];
       setTaskList(updatedTaskList);
@@ -92,18 +95,27 @@ const AddNewTask = ({
               onChange={(e) => setTaskDescription(e.target.value)}
               sx={{ mb: 4, width: "100%", backgroundColor: "#ffffff" }}
             />
-            <TextField
-              id="outlined-basic"
-              label="When is the task due?"
-              variant="outlined"
-              value={taskDue}
-              onChange={(e) => setTaskDue(e.target.value)}
-              sx={{ mb: 4, width: "100%", backgroundColor: "#ffffff" }}
-            />
+            <LocalizationProvider
+              dateAdapter={AdapterDayjs}
+              adapterLocale="en-gb"
+            >
+              <DatePicker
+                label="When is the task due?"
+                value={taskDue}
+                onChange={(newValue) => setTaskDue(newValue)}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    sx={{ mb: 4, width: "100%", backgroundColor: "#ffffff" }}
+                  />
+                )}
+              />
+            </LocalizationProvider>
             <Button
               variant="contained"
               type="submit"
               sx={{
+                mt: 4,
                 backgroundColor: "#4e8fe4",
                 color: "white",
                 "&:hover": { backgroundColor: "#3b6cb7" },
