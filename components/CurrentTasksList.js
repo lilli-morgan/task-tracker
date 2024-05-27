@@ -96,6 +96,16 @@ const CurrentTasksList = ({
                         </Box>
                       }
                     />
+                    <Box>
+                      <DeleteTaskButton
+                        id={task.id}
+                        taskList={taskList}
+                        setTaskList={setTaskList}
+                        completedTaskList={completedTaskList}
+                        setCompletedTaskList={setCompletedTaskList}
+                        isCompletedTask={true}
+                      />
+                    </Box>
                   </ListItem>
                 </CardContent>
               </Card>
@@ -153,6 +163,9 @@ const CurrentTasksList = ({
                         id={task.id}
                         taskList={taskList}
                         setTaskList={setTaskList}
+                        isCompletedTask={false}
+                        completedTaskList={completedTaskList}
+                        setCompletedTaskList={setCompletedTaskList}
                       />
                     </Box>
                   </ListItem>

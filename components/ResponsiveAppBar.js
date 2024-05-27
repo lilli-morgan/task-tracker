@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 
 const pages = ["My tasks", "Household"];
 const settings = ["Profile", "Logout"];
@@ -39,9 +40,11 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <DoneOutlineIcon
+            sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}
+          />
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
